@@ -55,8 +55,6 @@ const Slick: React.FC<PropsSlick> = ({ data }) => {
     }
   }, []);
 
-  console.log(stateSettings);
-
   return (
     <Container>
       <Slider {...stateSettings}>

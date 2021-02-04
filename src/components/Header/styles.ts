@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FiMenu, FiSearch, FiArrowLeft } from 'react-icons/fi';
+
+interface PropsIcon {
+  isActive: boolean;
+}
 
 export const Container = styled.header`
   display: flex;
@@ -15,8 +19,9 @@ export const IconMenu = styled(FiMenu)`
   }
 `;
 
-export const IconSearch = styled(FiSearch)`
+export const IconSearch = styled(FiSearch)<PropsIcon>`
   font-size: 22px;
+  z-index: ${(props) => (props.isActive ? 0 : 10)};
   &:hover {
     cursor: pointer;
   }

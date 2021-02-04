@@ -21,7 +21,7 @@ interface PropsRoute {
 
 const List: React.FC = () => {
   const { category } = useParams<PropsRoute>();
-  const { requestBooks, books } = useBooks();
+  const { requestBooks, books, cleanState } = useBooks();
   const [pageSize, setPageSize] = useState<number>(0);
 
   const requestBooksPage = useCallback(() => {
@@ -31,6 +31,7 @@ const List: React.FC = () => {
   }, [requestBooks, category, pageSize]);
 
   useEffect(() => {
+    cleanState();
     requestBooksPage();
   }, []);
 

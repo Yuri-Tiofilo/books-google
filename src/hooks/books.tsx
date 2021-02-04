@@ -8,6 +8,7 @@ interface BookContextData {
   requestBooks(query: string, pageSize: number): void;
   requestDetailsBook(query: string): void;
   books: ListBooks[];
+  cleanState(): void;
 }
 
 const AuthContext = createContext<BookContextData>({} as BookContextData);
@@ -25,6 +26,10 @@ const BookProvider: React.FC = ({ children }) => {
     setData((prevState) => [...prevState, ...response.items]);
   }, []);
 
+  const cleanState = useCallback(() => {
+    setData([] as ListBooks[]);
+  }, []);
+
   const requestDetailsBook = useCallback(async (query: string) => {
     const { data: response } = await api.get(`/${query}`);
 
@@ -33,7 +38,13 @@ const BookProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ book: bookState, requestBooks, books: data, requestDetailsBook }}
+      value={{
+        book: bookState,
+        requestBooks,
+        books: data,
+        requestDetailsBook,
+        cleanState,
+      }}
     >
       {children}
     </AuthContext.Provider>

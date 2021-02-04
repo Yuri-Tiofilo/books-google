@@ -26,6 +26,7 @@ export const ButtonViewMore = styled.button`
   color: #0288d1;
 
   &:hover {
-    color: #000;
+    background: #0288d1;
+    color: #fff;
   }
 `;

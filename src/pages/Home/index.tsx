@@ -24,10 +24,10 @@ const Home: React.FC = () => {
     data: [],
   });
 
+  console.log(categories);
+
   useEffect(() => {
     requestBooks(categories.name, 1);
-
-    categories.data = [...books];
   }, []);
 
   useEffect(() => {
