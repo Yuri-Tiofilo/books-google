@@ -1,10 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Header from '../../components/Header';
 
 import { useBooks } from '../../hooks/books';
 import { ListBooks } from '../../dtos/books';
 
-import { Container } from './styles';
+import {
+  Container,
+  ListBook,
+  ButtonLoadMore,
+  ContainerButtonLoadMore,
+  ImageNotExist,
+  TextImageExist,
+  Content,
+} from './styles';
 
 interface PropsRoute {
   category?: string | undefined;
@@ -33,32 +42,48 @@ const List: React.FC = () => {
   }, [setPageSize, category, pageSize, requestBooks]);
 
   return (
-    <Container>
-      <h1>List</h1>
-      {books.length !== 0 ? (
-        <div>
-          {books.map((element: ListBooks) => (
-            <Link to={`/book/${element.id}`} key={element.id}>
-              <li>
-                <img
-                  src={element.volumeInfo?.imageLinks?.thumbnail}
-                  alt="books"
-                />
-              </li>
-            </Link>
-          ))}
-        </div>
-      ) : null}
+    <>
+      <Header isMenu functionOnClick={() => {}} />
+      <Container>
+        <Content>
+          {books.length !== 0 ? (
+            <ListBook>
+              {books.map((element: ListBooks) => (
+                <Link
+                  to={`/book/${element.id}`}
+                  key={element.id}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <li>
+                    {element.volumeInfo?.imageLinks?.thumbnail ? (
+                      <img
+                        src={element.volumeInfo?.imageLinks?.thumbnail}
+                        alt="books"
+                      />
+                    ) : (
+                      <ImageNotExist>
+                        <TextImageExist>Image not exist</TextImageExist>
+                      </ImageNotExist>
+                    )}
+                  </li>
+                </Link>
+              ))}
+            </ListBook>
+          ) : null}
+        </Content>
 
-      <button
-        type="button"
-        onClick={() => {
-          loadMoreBooks();
-        }}
-      >
-        Load More
-      </button>
-    </Container>
+        <ContainerButtonLoadMore>
+          <ButtonLoadMore
+            type="button"
+            onClick={() => {
+              loadMoreBooks();
+            }}
+          >
+            Load More
+          </ButtonLoadMore>
+        </ContainerButtonLoadMore>
+      </Container>
+    </>
   );
 };
 

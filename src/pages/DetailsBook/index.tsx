@@ -74,9 +74,11 @@ const DetailsBook: React.FC = () => {
                 <ContentRight>
                   <Title>{`${book.volumeInfo?.title}`}</Title>
 
-                  <Author>
-                    {`by ${book.volumeInfo?.authors.map((author) => author)}`}
-                  </Author>
+                  {book.volumeInfo?.authors ? (
+                    <Author>
+                      {`by ${book.volumeInfo?.authors.map((author) => author)}`}
+                    </Author>
+                  ) : null}
 
                   <ContainerPriceWithRating>
                     {book?.saleInfo?.saleability !== 'NOT_FOR_SALE' ? (

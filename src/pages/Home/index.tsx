@@ -1,23 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container } from './styles';
+import Header from '../../components/Header';
+import Slick from '../../components/Slick';
 
 import { useBooks } from '../../hooks/books';
+import { ListBooks } from '../../dtos/books';
+
+import { Container, HeaderShelf, TitleShelf, ButtonViewMore } from './styles';
+
+interface PropsCategory {
+  idCategory: number;
+  name: string;
+  data: ListBooks[];
+}
 
 const Home: React.FC = () => {
-  const { book, requestBooks, books } = useBooks();
-  console.log(books);
+  const { requestBooks, books } = useBooks();
 
-  const [query, setQuery] = useState<string>('harrypotter');
+  const [categories, setCategories] = useState<PropsCategory>({
+    idCategory: 1,
+    name: 'tecnologia',
+    data: [],
+  });
+
+  useEffect(() => {
+    requestBooks(categories.name, 1);
+
+    categories.data = [...books];
+  }, []);
+
+  useEffect(() => {
+    setCategories({ ...categories, data: books });
+  }, [books]);
 
   return (
-    <Container>
-      <h1>Home</h1>
-      <Link to={`/list/${query}`}>
-        <button type="button">Acessa listagem</button>
-      </Link>
-    </Container>
+    <>
+      <Header
+        isMenu
+        functionOnClick={() => {
+          console.log('veio aqui');
+        }}
+      />
+      <Container>
+        <HeaderShelf>
+          <TitleShelf>{categories.name}</TitleShelf>
+          <Link to={`/list/${categories.name}`}>
+            <ButtonViewMore type="button">Ver mais</ButtonViewMore>
+          </Link>
+        </HeaderShelf>
+        {categories.data ? (
+          <div>
+            <Slick data={categories.data} />
+          </div>
+        ) : null}
+
+        <Slick />
+      </Container>
+    </>
   );
 };
 
