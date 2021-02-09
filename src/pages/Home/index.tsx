@@ -24,8 +24,6 @@ const Home: React.FC = () => {
     data: [],
   });
 
-  console.log(categories);
-
   useEffect(() => {
     requestBooks(categories.name, 1);
   }, []);
@@ -36,12 +34,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Header
-        isMenu
-        functionOnClick={() => {
-          console.log('veio aqui');
-        }}
-      />
+      <Header isMenu functionOnClick={() => {}} />
       <Container>
         <HeaderShelf>
           <TitleShelf>{categories.name}</TitleShelf>
