@@ -11,7 +11,7 @@ interface BookContextData {
   cleanState(): void;
 }
 
-const AuthContext = createContext<BookContextData>({} as BookContextData);
+const BooksContext = createContext<BookContextData>({} as BookContextData);
 
 const BookProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<ListBooks[]>([] as ListBooks[]);
@@ -37,7 +37,7 @@ const BookProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider
+    <BooksContext.Provider
       value={{
         book: bookState,
         requestBooks,
@@ -47,11 +47,11 @@ const BookProvider: React.FC = ({ children }) => {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </BooksContext.Provider>
   );
 };
 function useBooks(): BookContextData {
-  const context = useContext(AuthContext);
+  const context = useContext(BooksContext);
 
   return context;
 }
