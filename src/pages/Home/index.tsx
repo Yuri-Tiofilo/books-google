@@ -26,11 +26,11 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     requestBooks(categories.name, 1);
-  }, []);
+  }, [categories, requestBooks]);
 
   useEffect(() => {
     setCategories({ ...categories, data: books });
-  }, [books]);
+  }, [books, categories]);
 
   return (
     <>

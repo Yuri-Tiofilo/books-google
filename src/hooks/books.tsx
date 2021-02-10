@@ -18,7 +18,7 @@ const BookProvider: React.FC = ({ children }) => {
 
   const [bookState, setBookState] = useState<ListBooks>({} as ListBooks);
 
-  const requestBooks = useCallback(async (query: string, pageSize: number) => {
+  const requestBooks = useCallback(async (query: string, pageSize = 1) => {
     const { data: response } = await api.get(
       `?q=${query}&startIndex=${pageSize}&maxResults=12`,
     );
