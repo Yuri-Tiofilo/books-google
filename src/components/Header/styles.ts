@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { FiMenu, FiSearch, FiArrowLeft } from 'react-icons/fi';
+import styled from 'styled-components';
+import { FiMenu, FiSearch, FiArrowLeft, FiX } from 'react-icons/fi';
 
 interface PropsIcon {
   isActive: boolean;
@@ -9,7 +9,7 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  background: #ffe207;
+  background: ${({ theme }) => theme.colors.primary};
 `;
 
 export const IconMenu = styled(FiMenu)`
@@ -21,7 +21,7 @@ export const IconMenu = styled(FiMenu)`
 
 export const IconSearch = styled(FiSearch)<PropsIcon>`
   font-size: 22px;
-  z-index: ${(props) => (props.isActive ? 0 : 10)};
+  z-index: ${({ isActive }) => (isActive ? 0 : 10)};
   &:hover {
     cursor: pointer;
   }
@@ -45,3 +45,4 @@ export const TitleHeader = styled.div`
     justify-content: center;
   }
 `;
+export const IconClose = styled(FiX)``;

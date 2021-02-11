@@ -12,6 +12,7 @@ import {
   IconMenu,
   IconArrowLeft,
   TitleHeader,
+  IconClose,
 } from './styles';
 
 interface PropsHeader {
@@ -64,6 +65,7 @@ const Header: React.FC<PropsHeader> = ({ isMenu, functionOnClick }) => {
           functionOnClikIcon={() => {
             setSearchIsActive(!searchIsActive);
           }}
+          icon={IconClose}
           isActive={searchIsActive}
           placeholder="Pesquise por algo"
           value={stateInputSearch}

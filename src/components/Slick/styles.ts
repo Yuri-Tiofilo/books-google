@@ -2,7 +2,13 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  padding: 0 35px;
+
+  @media (max-width: 480px) {
+    padding: 0 0px;
+  }
+`;
 
 export const Card = styled.div``;
 
@@ -18,7 +24,7 @@ export const ImageCard = styled.img`
 `;
 
 export const ImageNotExist = styled.div`
-  background: #f90;
+  background: ${({ theme }) => theme.colors.imageNotExist};
   width: 100%;
   height: 180px;
   display: flex;
@@ -39,5 +45,5 @@ export const TextImageExist = styled.p`
   text-decoration: none;
   word-wrap: break-word;
   text-align: center;
-  color: #000;
+  color: ${({ theme }) => theme.colors.black};
 `;

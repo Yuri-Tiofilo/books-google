@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #ffe207;
+  background: ${({ theme }) => theme.colors.primary};
   padding: 10px;
   margin: 0px auto;
 `;
@@ -68,7 +68,7 @@ export const ContainerButtonLoadMore = styled.div`
 `;
 
 export const ButtonLoadMore = styled.button`
-  background: #0288d1;
+  background: ${({ theme }) => theme.colors.secondary};
   border: 0;
   width: 250px;
   height: 48px;
@@ -82,7 +82,7 @@ export const ButtonLoadMore = styled.button`
 `;
 
 export const ImageNotExist = styled.div`
-  background: #f90;
+  background: ${({ theme }) => theme.colors.imageNotExist};
   width: 100%;
   height: 160px;
   display: flex;
@@ -101,5 +101,5 @@ export const TextImageExist = styled.p`
   text-decoration: none;
   word-wrap: break-word;
   text-align: center;
-  color: #000;
+  color: ${({ theme }) => theme.colors.black};
 `;

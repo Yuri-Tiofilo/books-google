@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Header from '../../components/Header';
 
 import { useBooks } from '../../hooks/books';
-import { ListBooks } from '../../dtos/books';
+import { ListBooks } from '../../interfaces/books';
 
 import {
   Container,

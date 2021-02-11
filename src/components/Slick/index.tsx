@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 
 import { Link } from 'react-router-dom';
@@ -10,54 +10,53 @@ import {
   ImageNotExist,
   TextImageExist,
 } from './styles';
-import { ListBooks } from '../../dtos/books';
+import { ListBooks } from '../../interfaces/books';
 
 interface PropsSlick {
   data?: ListBooks[];
 }
 
-interface PropsSettingSlick {
-  dots: boolean;
-  infinite: boolean;
-  speed: number;
-  slidesToShow: number;
-  slidesToScroll: number;
-  arrows: boolean;
-}
-
 const Slick: React.FC<PropsSlick> = ({ data }) => {
-  const [stateSettings, setStateSettings] = useState<PropsSettingSlick>(
-    {} as PropsSettingSlick,
-  );
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    arrows: false,
-  };
-
-  const settingsDesktop = {
-    dots: false,
-    infinite: true,
-    speed: 500,
     slidesToShow: 8,
-    slidesToScroll: 3,
-    arrows: false,
-  };
+    slidesToScroll: 8,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          dots: false,
+          speed: 500,
+          slidesToShow: 8,
+          slidesToScroll: 8,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+        },
+      },
 
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setStateSettings(settings);
-    } else {
-      setStateSettings(settingsDesktop);
-    }
-  }, []);
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          arrows: false,
+        },
+      },
+    ],
+  };
 
   return (
     <Container>
-      <Slider {...stateSettings}>
+      <Slider {...settings}>
         {data?.map((element) => (
           <Card key={element.id}>
             {element.volumeInfo?.imageLinks?.thumbnail ? (

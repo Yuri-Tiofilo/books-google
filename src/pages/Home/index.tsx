@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Slick from '../../components/Slick';
 
 import { useBooks } from '../../hooks/books';
-import { ListBooks } from '../../dtos/books';
+import { ListBooks } from '../../interfaces/books';
 
 import { Container, HeaderShelf, TitleShelf, ButtonViewMore } from './styles';
 
@@ -26,11 +26,11 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     requestBooks(categories.name, 1);
-  }, [categories, requestBooks]);
+  }, []);
 
   useEffect(() => {
     setCategories({ ...categories, data: books });
-  }, [books, categories]);
+  }, [books]);
 
   return (
     <>
